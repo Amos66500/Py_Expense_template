@@ -18,7 +18,7 @@ def add_user():
     
     # Here we open the csv file in append mode and we add a row with the row_infos data
     with open('users.csv', 'a', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(row_infos)
 
     print("User Added !")

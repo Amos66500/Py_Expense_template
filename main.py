@@ -2,6 +2,7 @@ from PyInquirer import prompt
 from examples import custom_style_2
 from expense import expense_questions, new_expense
 from user import user_questions, add_user
+from status import show_status
 
 def ask_option():
     main_option = {
@@ -10,11 +11,17 @@ def ask_option():
         "message":"Expense Tracker v0.1",
         "choices": ["New Expense","Show Status","New User"]
     }
+    # Ask the customer what option he wants using the arrow key
     option = prompt(main_option)
+    # Redirect to the expense option
     if (option['main_options']) == "New Expense":
         new_expense()
         ask_option()
-    
+    # Redirect to the status option
+    if (option['main_options']) == "Show Status":
+        show_status()
+        ask_option()
+    # Redirect to the user option
     if (option['main_options']) == "New User":
         add_user()
         ask_option()

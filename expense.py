@@ -11,6 +11,13 @@ def get_users():
             options.append(row[0])
     return options
 
+def involved_people(answers):
+    options = []
+    for users in get_users():
+        if users != answers['spender']:
+            options.append({'name': users, 'checked': False})
+    return options
+
 expense_questions = [
     {
         "type":"input",
@@ -28,6 +35,12 @@ expense_questions = [
         "message":"New Expense - Spender: ",
         "choices": get_users(),
     },
+    {
+        "type":"checkbox",
+        "name":"involved_people",
+        "message":"New Expense - Involved People: ",
+        "choices": involved_people,
+    },
 ]
 
 
@@ -40,7 +53,7 @@ def new_expense(*args):
 
     # Here we open the csv file in append mode and we add a row with the row_infos data
     with open('expense_report.csv', 'a', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(row_infos)
 
     print("Expense Added !")
