@@ -11,9 +11,11 @@ def get_users():
             options.append(row[0])
     return options
 
+# Function who create the dictionnary for the checkbox choices from the get_users() return list
 def involved_people(answers):
     options = []
     for users in get_users():
+        # Don't include the spender in the choices
         if users != answers['spender']:
             options.append({'name': users, 'checked': False})
     return options
@@ -43,7 +45,8 @@ expense_questions = [
     },
 ]
 
-
+# Create a new expense in the expense_report.csv with this format :
+# AMOUNT, LABEL, SPENDER, [LIST_OF_INVOLVED_PEOPLE]
 def new_expense(*args):
     infos = prompt(expense_questions)
     # Here we create a row from the dictionnary 'infos' to get the value from each key
